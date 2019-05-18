@@ -6,6 +6,7 @@ function setup() {
     //! Getting DOM objects (HTML elements)
     let grassCount = document.getElementById('grassCount');
     let grassEaterCount = document.getElementById('grassEaterCount');
+    let PredatoryCount = document.getElementById('PredatoryCount');
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
     socket.on("data", drawCreatures);
 

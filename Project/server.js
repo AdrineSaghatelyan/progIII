@@ -4,6 +4,7 @@
 //! Setting global arrays  --  START
 grassArr = [];
 grassEaterArr = [];
+PredatoryArr = [];
 matrix = [];
 //! Setting global arrays  -- END
 
@@ -11,7 +12,7 @@ matrix = [];
 
 //! Creating MATRIX -- START
 let random = require('./modules/random');
-function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterArr, fireArr) {
+function matrixGenerator(matrixSize, grass, grassEater, Predatory, waterArr, fireArr) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -19,7 +20,7 @@ function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterAr
         }
     }
     for (let i = 0; i < grass; i++) {
-        let customX = Math.floor(random(matrixSize)); // 0 - 39
+        let customX = Math.floor(random(matrixSize)); 
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 1;
     }
@@ -28,11 +29,12 @@ function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterAr
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 2;
     }
-    for (let i = 0; i < grassEaterEater; i++) {
+    for (let i = 0; i < Predatory; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 3;
     }
+    
     for (let i = 0; i < waterArr; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
@@ -44,7 +46,7 @@ function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterAr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(10, 5, 1);
+matrixGenerator(10, 5, 1,3);
 //! Creating MATRIX -- END
 
 
@@ -52,6 +54,7 @@ matrixGenerator(10, 5, 1);
 //! Requiring modules  --  START
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
+var Predatory = require("./modules/Predatory.js");
 //! Requiring modules  --  END
 
 
@@ -80,6 +83,10 @@ function creatingObjects() {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
             }
+            else if (matrix[y][x] == 3) {
+                var pred = new Predatory(x, y);
+               PredatoryArr.push(pred);
+            }
         }
     }
 }
@@ -96,6 +103,11 @@ function game() {
     if (grassEaterArr[0] !== undefined) {
         for (var i in grassEaterArr) {
             grassEaterArr[i].eat();
+        }
+    }
+    if (PredatoryArr[0] !== undefined) {
+        for (var i in PredatoryArr) {
+            PredatoryArr[i].eat();
         }
     }
 
