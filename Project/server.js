@@ -1,15 +1,10 @@
-
-
-
 //! Setting global arrays  --  START
 grassArr = [];
 grassEaterArr = [];
 PredatoryArr = [];
 matrix = [];
+grassHashiv=0;
 //! Setting global arrays  -- END
-
-
-
 //! Creating MATRIX -- START
 let random = require('./modules/random');
 function matrixGenerator(matrixSize, grass, grassEater, Predatory, waterArr, fireArr) {
@@ -113,7 +108,8 @@ function game() {
 
     //! Object to send
     let sendData = {
-        matrix: matrix
+        matrix: matrix ,
+        grassCount: grassHashiv
     }
 
     //! Send data over the socket to clients who listens "data"
